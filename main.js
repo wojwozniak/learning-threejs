@@ -32,6 +32,7 @@ gui.add(world.plane, 'heightSegments', 1, 50).onChange(() => {
   generatePlane();
 });
 
+const raycaster = new THREE.Raycaster();
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, .1, 1000);
 const renderer = new THREE.WebGLRenderer();
@@ -87,6 +88,11 @@ const backLight = new THREE.DirectionalLight(0xffffff, 1);
 backLight.position.set(0, 0, -1);
 scene.add(backLight);
 
+const mouse = {
+  x: undefined,
+  y: undefined
+};
+
 function animate() {
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
@@ -95,11 +101,21 @@ function animate() {
   mesh.rotation.y += .01;
   */
   //planeMesh.rotation.x += .02;
+
+
+  raycaster.setFromCamera(mouse, camera);
+  raycaster.intersectObject(planeMesh);
+  if (intersects.length > 0) {
+    console.log("intersects!");
+  }
 }
 
 animate();
 
 addEventListener('mousemove', () => {
-  console.log(pageX);
+  mouse.x = (event.clientX / innerWidth)*2-1;
+  mouse.y = -(event.clientY / innerHeight)*2+1;
+  console.log(mouse);
+});
 
-})
+/* koniec filmu na 1:22:30 !
