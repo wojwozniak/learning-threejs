@@ -7,10 +7,10 @@ const gui = new dat.GUI();
 console.log(gui);
 const world = {
   plane: {
-    width: 5,
-    height: 5,
-    widthSegments: 15,
-    heightSegments: 15
+    width: 19,
+    height: 19,
+    widthSegments: 32,
+    heightSegments: 30
 
   }
 }
@@ -21,10 +21,10 @@ const generatePlane = () => {
   generateHeight();
   generateColours();
 }
-gui.add(world.plane, 'width', 1, 10).onChange(() => {
+gui.add(world.plane, 'width', 5, 50).onChange(() => {
   generatePlane();
 });
-gui.add(world.plane, 'height', 1, 10).onChange(() => {
+gui.add(world.plane, 'height', 5, 50).onChange(() => {
   generatePlane();
 });
 gui.add(world.plane, 'widthSegments', 1, 50).onChange(() => {
@@ -58,7 +58,7 @@ scene.add(mesh);
 
 camera.position.z = 5;
 
-const planeGeometry = new THREE.PlaneGeometry(5, 5, 15, 15);
+const planeGeometry = new THREE.PlaneGeometry(19, 19, 32, 30);
 const planeMaterial = new THREE.MeshPhongMaterial({
   side: THREE.DoubleSide,
   flatShading: THREE.FlatShading,
